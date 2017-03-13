@@ -69,15 +69,83 @@ html {
 }
 
 .tic, .toe {
-    -webkit-transform:rotate(-10deg);
-       -moz-transform:rotate(-10deg);
-        -ms-transform:rotate(-10deg);
-         -o-transform:rotate(-10deg);
+    transform:rotate(-10deg);       
 }
 
 .tac {
-    -webkit-transform:rotate(5deg);
-       -moz-transform:rotate(5deg);
-        -ms-transform:rotate(5deg);
-         -o-transform:rotate(5deg);
+    transform:rotate(5deg);
+}
+
+.center {
+    width: 450px;
+    margin: 0 auto;
+}
+
+.game-board-container {
+    background: #362009;
+    height: 350px;
+    width: 350px;
+}
+
+.square {
+    height: 114px;
+    width: 114px;
+    background: #e5dcd3;
+    color: #362009;
+    font-family: sans-serif;
+    font-size: 6em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#one {
+    position: relative;
+}
+
+#two {
+    position: relative;
+    top: -114px;
+    left: 118px;
+}
+
+#three {
+    position: relative;
+    top: -228px;
+    left: 236px;
+}
+
+#four {
+    position: relative;
+    top: -224px;
+}
+
+#five {
+    position: relative;
+    top: -338px;
+    left: 118px;
+}
+
+#six {
+    position: relative;
+    top: -452px;
+    left: 236px;
+}
+
+#seven {
+    position: relative;
+    top: -448px;
+}
+
+#eight {
+    position: relative;
+    top: -562px;
+    left: 118px;
+}
+
+#nine {
+    position: relative;
+    top: -676px;
+    left:236px;
 }
