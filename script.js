@@ -1,103 +1,108 @@
-var squareOne = document.getElementById('one'),
-    squareTwo = document.getElementById('two'),
-    squareThree = document.getElementById('three'),
-    squareFour = document.getElementById('four'),
-    squareFive = document.getElementById('five'),
-    squareSix = document.getElementById('six'),
-    squareSeven = document.getElementById('seven');
-    squareEight = document.getElementById('eight'),
-    squareNine = document.getElementById('nine'),
-    realPlayer = "",
-    computerPlayer = "",
-    gameStarted,
-    gameBoard = {},
-    arrayOfSquareVar = [squareOne, squareTwo, squareThree, squareFour, squareFive,
-                          squareSix, squareSeven, squareEight, squareNine];
+window.onload = function () {
 
-resetGame();
+    var squareOne = document.getElementById('one'),
+        squareTwo = document.getElementById('two'),
+        squareThree = document.getElementById('three'),
+        squareFour = document.getElementById('four'),
+        squareFive = document.getElementById('five'),
+        squareSix = document.getElementById('six'),
+        squareSeven = document.getElementById('seven');
+        squareEight = document.getElementById('eight'),
+        squareNine = document.getElementById('nine'),
+        realPlayer = "",
+        computerPlayer = "",
+        gameStarted = false,
+        gameBoard = {},
+        arrayOfSquareVar = [squareOne, squareTwo, squareThree, squareFour, squareFive,
+            squareSix, squareSeven, squareEight, squareNine];
 
-document.getElementById('x-btn').onclick = function() {
-    realPlayer = "X";
-    computerPlayer = "O";
-    whoGofirst();
-}
+    resetGame();
 
-document.getElementById('o-btn').onclick = function() {
-    realPlayer = "O";
-    computerPlayer = "X";
-    whoGoFirst();
-}
-
-document.getElementById('reset-btn').onclick = resetGame;
-document.getElementById('one').onclick = realPlayerMove;
-document.getElementById('two').onclick = realPlayerMove;
-document.getElementById('three').onclick = realPlayerMove;
-document.getElementById('four').onclick = realPlayerMove;
-document.getElementById('five').onclick = realPlayerMove;
-document.getElementById('six').onclick = realPlayerMove;
-document.getElementById('seven').onclick = realPlayerMove;
-document.getElementById('eight').onclick = realPlayerMove;
-document.getElementById('nine').onclick = realPlayerMove;
-
-function whoGofirst() {
-    if (Math.floor(Math.random() * 2) == 0) {
-        alert("Computer goes first!");
-        firstComputerMove();
-    } else {
-        alert("You go first!");
+    document.getElementById('x-btn').onclick = function () {
+        realPlayer = "X";
+        computerPlayer = "O";
+        whoGoFirst();
     }
-    gameStarted = true;
-}
 
-function firstComputerMove() {
-    var firstMoveSet = [squareOne, squareThree, squareFive, squareSeven, squareNine],
-        firstMove = Math.floor(Math.random() * firstMoveSet.length);
-    firstMoveSet[firstMove].innerHTML = computerPlayer;
-}
-
-function regularComputerMove() {
-    var num = Math.floor(Math.random() * 9);
-    if (arrayOfSquareVar[num].innerHTML == "") {
-        arrayOfSquareVar[num].innerHTML = computerPlayer;
-    } else {
-        regularComputerMove();
+    document.getElementById('o-btn').onclick = function () {
+        realPlayer = "O";
+        computerPlayer = "X";
+        whoGoFirst();
     }
-}
 
-function realPlayerMove() {
-    for (var i = 0; i < arrayOfSquareVar.length; i++) {
-        if (gameStarted == true) {
-            if (this == arrayOfSquareVar[i]) {
-                gameBoard[i] = 1;
-                this.innerHTML = realPlayer;
+    document.getElementById('reset-btn').onclick = resetGame;
+    document.getElementById('one').onclick = realPlayerMove;
+    document.getElementById('two').onclick = realPlayerMove;
+    document.getElementById('three').onclick = realPlayerMove;
+    document.getElementById('four').onclick = realPlayerMove;
+    document.getElementById('five').onclick = realPlayerMove;
+    document.getElementById('six').onclick = realPlayerMove;
+    document.getElementById('seven').onclick = realPlayerMove;
+    document.getElementById('eight').onclick = realPlayerMove;
+    document.getElementById('nine').onclick = realPlayerMove;
+
+    function whoGoFirst() {
+        if (Math.floor(Math.random() * 2) == 0) {
+            alert("Computer goes first!");
+            firstComputerMove();
+        } else {
+            alert("You go first!");
+        }
+        gameStarted = true;
+    }
+
+    function firstComputerMove() {
+        var firstMoveSet = [squareOne, squareThree, squareFive, squareSeven, squareNine],
+            firstMove = Math.floor(Math.random() * firstMoveSet.length);
+        firstMoveSet[firstMove].innerHTML = computerPlayer;
+    }
+
+    function regularComputerMove() {
+        setTimeout(function () {
+            var num = Math.floor(Math.random() * 9);
+            if (arrayOfSquareVar[num].innerHTML == "") {
+                arrayOfSquareVar[num].innerHTML = computerPlayer;
+            } else {
+                regularComputerMove();
+            }
+        }, 500);
+    }
+
+    function realPlayerMove() {
+        for (var i = 0; i < arrayOfSquareVar.length; i++) {
+            if (gameStarted == true) {
+                if (this == arrayOfSquareVar[i]) {
+                    gameBoard[i] = 1;
+                    this.innerHTML = realPlayer;
+                }
             }
         }
+        regularComputerMove();
     }
-    regularComputerMove();
-}
 
 
-// Function to check if there is a winner
-function checkForWinner() {
+    // Function to check if there is a winner
+    function checkForWinner() {
 
-}
-
-
-function resetGame() {
-    for (var i = 0; i < 9; i++) {
-        gameBoard[i] = "";
     }
-}
 
-squareOne.innerHTML = "";
-squareTwo.innerHTML = "";
-squareThree.innerHTML = "";
-squareFour.innerHTML = "";
-squareFive.innerHTML = "";
-squareSix.innerHTML = "";
-squareSeven.innerHTML = "";
-squareEight.innerHTML = "";
-squareNine.innerHTML = "";
-realPlayer = "";
-computerPlayer = "";
-gameStarted = false;
+
+    function resetGame() {
+        for (var i = 0; i < 9; i++) {
+            gameBoard[i] = "";
+        }
+        squareOne.innerHTML = "";
+        squareTwo.innerHTML = "";
+        squareThree.innerHTML = "";
+        squareFour.innerHTML = "";
+        squareFive.innerHTML = "";
+        squareSix.innerHTML = "";
+        squareSeven.innerHTML = "";
+        squareEight.innerHTML = "";
+        squareNine.innerHTML = "";
+        realPlayer = "";
+        computerPlayer = "";
+        gameStarted = false;
+    }
+
+}
