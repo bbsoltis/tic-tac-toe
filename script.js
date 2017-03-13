@@ -69,6 +69,10 @@ window.onload = function () {
     }
 
     function realPlayerMove() {
+        if (this.innerHTML != "") {
+            return;
+        }
+        
         for (var i = 0; i < arrayOfSquareVar.length; i++) {
             if (gameStarted == true) {
                 if (this == arrayOfSquareVar[i]) {
