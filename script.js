@@ -1,0 +1,15 @@
+var squareOne = document.getElementById('one'),
+    squareTwo = document.getElementById('two'),
+    squareThree = document.getElementById('three'),
+    squareFour = document.getElementById('four'),
+    squareFive = document.getElementById('five'),
+    squareSix = document.getElementById('six'),
+    squareSeven = document.getElementById('seven');
+    squareEight = document.getElementById('eight'),
+    squareNine = document.getElementById('nine'),
+    realPlayer = "",
+    computerPlayer = "",
+    gameStarted,
+    gameBoard = {},
+    arrayOfSquareVar = [squareOne, squareTwo, squareThree, squareFour, squareFive,
+                          squareSix, squareSeven, squareEight, squareNine];
