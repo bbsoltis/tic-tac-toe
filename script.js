@@ -77,17 +77,23 @@ window.onload = function () {
             if (arrayOfSquareVar[num].innerHTML == "") {
                 arrayOfSquareVar[num].innerHTML = computerPlayer;
                 gameBoard[num] = 5;
+                realPlayerReady();
             } else {
                 regularComputerMove();
             }
         }, 300);
     }
 
+    function realPlayerReady() {
+        setTimeout(function() {
+            checkForWinner();
+        }, 200);
+    }
+
     function realPlayerMove() {
         if (this.innerHTML != "") {
             return;
         }
-
         for (var i = 0; i < arrayOfSquareVar.length; i++) {
             if (gameStarted == true) {
                 if (this == arrayOfSquareVar[i]) {
@@ -95,7 +101,6 @@ window.onload = function () {
                     this.innerHTML = realPlayer;
                 }
             }
-
         }
         regularComputerMove();
     }
@@ -111,17 +116,22 @@ window.onload = function () {
             sumOfColThree = gameBoard[2] + gameBoard[5] + gameBoard[8],
             sumOfDiaOne = gameBoard[0] + gameBoard[4] + gameBoard[8],
             sumOfDiaTwo = gameBoard[2] + gameBoard[4] + gameBoard[6],
-            arrayOfRowSums = [sumOfRowOne, sumOfRowTwo, sumOfRowThree, sumOfColOne, sumOfColTwo, sumOfColThree,
-                sumOfDiaOne, sumOfDiaTwo];
+            unusedSquares = 0;
+        arrayOfRowSums = [sumOfRowOne, sumOfRowTwo, sumOfRowThree, sumOfColOne, sumOfColTwo, sumOfColThree,
+            sumOfDiaOne, sumOfDiaTwo];
+
         for (var i = 0; i < arrayOfRowSums.length; i++) {
             if (arrayOfRowSums[i] == 3) {
+                resetGame();
                 return alert("You won!");
+
             } else if (arrayOfRowSums[i] == 15) {
+                resetGame();
                 return alert("You lost!");
-                
+
             }
+
         }
-        return;
     }
 
     function resetGame() {
