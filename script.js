@@ -99,13 +99,20 @@ window.onload = function () {
 
     // Function to check if there is a winner
     function checkForWinner() {
-
+        var sumOfRowOne = gameBoard[0] + gameBoard[1] + gameBoard[2],
+            sumOfRowTwo = gameBoard[3] + gameBoard[4] + gameBoard[5],
+            sumOfRowOne = gameBoard[6] + gameBoard[7] + gameBoard[8],
+            sumOfColOne = gameBoard[0] + gameBoard[3] + gameBoard[6],
+            sumOfColTwo = gameBoard[1] + gameBoard[4] + gameBoard[7],
+            sumOfColOne = gameBoard[2] + gameBoard[5] + gameBoard[8],
+            sumOfDiaOne = gameBoard[0] + gameBoard[4] + gameBoard[8],
+            sumOfDiaTwo = gameBoard[2] + gameBoard[4] + gameBoard[6];
     }
 
 
     function resetGame() {
         for (var i = 0; i < 9; i++) {
-            gameBoard[i] = "";
+            gameBoard[i] = 0;
         }
         squareOne.innerHTML = "";
         squareTwo.innerHTML = "";
