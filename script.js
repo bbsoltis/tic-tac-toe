@@ -14,7 +14,8 @@ window.onload = function () {
         gameStarted = false,
         gameBoard = {},
         arrayOfSquareVar = [squareOne, squareTwo, squareThree, squareFour, squareFive,
-            squareSix, squareSeven, squareEight, squareNine];
+            squareSix, squareSeven, squareEight, squareNine
+        ];
 
     resetGame();
 
@@ -85,7 +86,7 @@ window.onload = function () {
     }
 
     function realPlayerReady() {
-        setTimeout(function() {
+        setTimeout(function () {
             checkForWinner();
         }, 0);
     }
@@ -105,7 +106,6 @@ window.onload = function () {
         regularComputerMove();
     }
 
-
     // Function to check if there is a winner
     function checkForWinner() {
         var sumOfRowOne = gameBoard[0] + gameBoard[1] + gameBoard[2],
@@ -118,7 +118,8 @@ window.onload = function () {
             sumOfDiaTwo = gameBoard[2] + gameBoard[4] + gameBoard[6],
             unusedSquares = 0;
         arrayOfRowSums = [sumOfRowOne, sumOfRowTwo, sumOfRowThree, sumOfColOne, sumOfColTwo, sumOfColThree,
-            sumOfDiaOne, sumOfDiaTwo];
+            sumOfDiaOne, sumOfDiaTwo
+        ];
 
         for (var i = 0; i < arrayOfRowSums.length; i++) {
             if (arrayOfRowSums[i] == 3) {
@@ -128,9 +129,7 @@ window.onload = function () {
             } else if (arrayOfRowSums[i] == 15) {
                 resetGame();
                 return alert("You lost!");
-
             }
-
         }
     }
 
