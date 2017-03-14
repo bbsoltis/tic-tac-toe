@@ -61,7 +61,7 @@ html {
     font-size: 4em;
     font-weight: 200;
     color: #362009;
-    padding: 50px 0 40px 0;
+    padding: 20px 0 30px 0;
 }
 
 .tic, .tac, .toe {
@@ -153,7 +153,8 @@ html {
 .btn-container {
     position: relative;
     text-align: center;
-    top: 40px;
+    top: 30px;
+    margin-bottom: 20px;
 }
 
 .btn {
