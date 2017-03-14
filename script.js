@@ -19,12 +19,14 @@ window.onload = function () {
     resetGame();
 
     document.getElementById('x-btn').onclick = function () {
+        resetGame();
         realPlayer = "X";
         computerPlayer = "O";
         whoGoFirst();
     }
 
     document.getElementById('o-btn').onclick = function () {
+        resetGame();
         realPlayer = "O";
         computerPlayer = "X";
         whoGoFirst();
@@ -56,24 +58,25 @@ window.onload = function () {
             firstMove = Math.floor(Math.random() * firstMoveSet.length - 1);
         firstMoveSet[firstMove].innerHTML = computerPlayer;
         if (firstMove == 0) {
-            gameBoard[0] = 2;
+            gameBoard[0] = 5;
         } else if (firstMove == 1) {
-            gameBoard[2] = 2;
+            gameBoard[2] = 5;
         } else if (firstMove == 2) {
-            gameBoard[4] = 2;
+            gameBoard[4] = 5;
         } else if (firstMove == 3) {
-            gameBoard[6] = 2;
+            gameBoard[6] = 5;
         } else if (firstMove == 4) {
-            gameBoard[8] = 2;
+            gameBoard[8] = 5;
         }
     }
 
     function regularComputerMove() {
         setTimeout(function () {
+            checkForWinner();
             var num = Math.floor(Math.random() * 9);
             if (arrayOfSquareVar[num].innerHTML == "") {
                 arrayOfSquareVar[num].innerHTML = computerPlayer;
-                gameBoard[num] = 2;
+                gameBoard[num] = 5;
             } else {
                 regularComputerMove();
             }
@@ -84,7 +87,7 @@ window.onload = function () {
         if (this.innerHTML != "") {
             return;
         }
-        
+
         for (var i = 0; i < arrayOfSquareVar.length; i++) {
             if (gameStarted == true) {
                 if (this == arrayOfSquareVar[i]) {
@@ -92,6 +95,7 @@ window.onload = function () {
                     this.innerHTML = realPlayer;
                 }
             }
+
         }
         regularComputerMove();
     }
@@ -101,14 +105,24 @@ window.onload = function () {
     function checkForWinner() {
         var sumOfRowOne = gameBoard[0] + gameBoard[1] + gameBoard[2],
             sumOfRowTwo = gameBoard[3] + gameBoard[4] + gameBoard[5],
-            sumOfRowOne = gameBoard[6] + gameBoard[7] + gameBoard[8],
+            sumOfRowThree = gameBoard[6] + gameBoard[7] + gameBoard[8],
             sumOfColOne = gameBoard[0] + gameBoard[3] + gameBoard[6],
             sumOfColTwo = gameBoard[1] + gameBoard[4] + gameBoard[7],
-            sumOfColOne = gameBoard[2] + gameBoard[5] + gameBoard[8],
+            sumOfColThree = gameBoard[2] + gameBoard[5] + gameBoard[8],
             sumOfDiaOne = gameBoard[0] + gameBoard[4] + gameBoard[8],
-            sumOfDiaTwo = gameBoard[2] + gameBoard[4] + gameBoard[6];
+            sumOfDiaTwo = gameBoard[2] + gameBoard[4] + gameBoard[6],
+            arrayOfRowSums = [sumOfRowOne, sumOfRowTwo, sumOfRowThree, sumOfColOne, sumOfColTwo, sumOfColThree,
+                sumOfDiaOne, sumOfDiaTwo];
+        for (var i = 0; i < arrayOfRowSums.length; i++) {
+            if (arrayOfRowSums[i] == 3) {
+                return alert("You won!");
+            } else if (arrayOfRowSums[i] == 15) {
+                return alert("You lost!");
+                
+            }
+        }
+        return;
     }
-
 
     function resetGame() {
         for (var i = 0; i < 9; i++) {
