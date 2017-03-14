@@ -53,8 +53,19 @@ window.onload = function () {
 
     function firstComputerMove() {
         var firstMoveSet = [squareOne, squareThree, squareFive, squareSeven, squareNine],
-            firstMove = Math.floor(Math.random() * firstMoveSet.length);
+            firstMove = Math.floor(Math.random() * firstMoveSet.length - 1);
         firstMoveSet[firstMove].innerHTML = computerPlayer;
+        if (firstMove == 0) {
+            gameBoard[0] = 2;
+        } else if (firstMove == 1) {
+            gameBoard[2] = 2;
+        } else if (firstMove == 2) {
+            gameBoard[4] = 2;
+        } else if (firstMove == 3) {
+            gameBoard[6] = 2;
+        } else if (firstMove == 4) {
+            gameBoard[8] = 2;
+        }
     }
 
     function regularComputerMove() {
@@ -62,10 +73,11 @@ window.onload = function () {
             var num = Math.floor(Math.random() * 9);
             if (arrayOfSquareVar[num].innerHTML == "") {
                 arrayOfSquareVar[num].innerHTML = computerPlayer;
+                gameBoard[num] = 2;
             } else {
                 regularComputerMove();
             }
-        }, 500);
+        }, 300);
     }
 
     function realPlayerMove() {
