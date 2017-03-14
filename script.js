@@ -87,7 +87,7 @@ window.onload = function () {
     function realPlayerReady() {
         setTimeout(function() {
             checkForWinner();
-        }, 200);
+        }, 0);
     }
 
     function realPlayerMove() {
