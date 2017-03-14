@@ -13,6 +13,7 @@ window.onload = function () {
         computerPlayer = "",
         gameStarted = false,
         gameBoard = {},
+        turns = 0,
         arrayOfSquareVar = [squareOne, squareTwo, squareThree, squareFour, squareFive,
             squareSix, squareSeven, squareEight, squareNine
         ];
@@ -57,6 +58,7 @@ window.onload = function () {
     function firstComputerMove() {
         var firstMoveSet = [squareOne, squareThree, squareFive, squareSeven, squareNine],
             firstMove = Math.floor(Math.random() * firstMoveSet.length - 1);
+        turns ++;    
         firstMoveSet[firstMove].innerHTML = computerPlayer;
         if (firstMove == 0) {
             gameBoard[0] = 5;
@@ -78,6 +80,7 @@ window.onload = function () {
             if (arrayOfSquareVar[num].innerHTML == "") {
                 arrayOfSquareVar[num].innerHTML = computerPlayer;
                 gameBoard[num] = 5;
+                turns ++;
                 realPlayerReady();
             } else {
                 regularComputerMove();
@@ -99,6 +102,7 @@ window.onload = function () {
             if (gameStarted == true) {
                 if (this == arrayOfSquareVar[i]) {
                     gameBoard[i] = 1;
+                    turns++;
                     this.innerHTML = realPlayer;
                 }
             }
@@ -117,20 +121,22 @@ window.onload = function () {
             sumOfDiaOne = gameBoard[0] + gameBoard[4] + gameBoard[8],
             sumOfDiaTwo = gameBoard[2] + gameBoard[4] + gameBoard[6],
             unusedSquares = 0;
-        arrayOfRowSums = [sumOfRowOne, sumOfRowTwo, sumOfRowThree, sumOfColOne, sumOfColTwo, sumOfColThree,
-            sumOfDiaOne, sumOfDiaTwo
-        ];
-
+            arrayOfRowSums = [sumOfRowOne, sumOfRowTwo, sumOfRowThree, sumOfColOne,
+                sumOfColTwo, sumOfColThree, sumOfDiaOne, sumOfDiaTwo],
+            sumOfSquares = 0;
+            
         for (var i = 0; i < arrayOfRowSums.length; i++) {
             if (arrayOfRowSums[i] == 3) {
                 resetGame();
                 return alert("You won!");
-
             } else if (arrayOfRowSums[i] == 15) {
                 resetGame();
                 return alert("You lost!");
+            } else if (turns == 9 && arrayOfRowSums[i] != 3 && arrayOfRowSums[i] != 15) {
+                resetGame();
+                return alert("Draw!");
             }
-        }
+        } 
     }
 
     function resetGame() {
@@ -148,6 +154,7 @@ window.onload = function () {
         squareNine.innerHTML = "";
         realPlayer = "";
         computerPlayer = "";
+        turns = 0;
         gameStarted = false;
     }
 
