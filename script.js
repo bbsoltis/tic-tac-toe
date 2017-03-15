@@ -117,23 +117,29 @@ window.onload = function () {
             sumOfDiaOne = gameBoard[0] + gameBoard[4] + gameBoard[8],
             sumOfDiaTwo = gameBoard[2] + gameBoard[4] + gameBoard[6],
             arrayOfRowSums = [sumOfRowOne, sumOfRowTwo, sumOfRowThree, sumOfColOne,
-                sumOfColTwo, sumOfColThree, sumOfDiaOne, sumOfDiaTwo],
-            sumOfSquares = 0;
-            
+                sumOfColTwo, sumOfColThree, sumOfDiaOne, sumOfDiaTwo
+            ],
+            sumOfGrid = 0;
+        // Interate over each row to check for winner
         for (var i = 0; i < arrayOfRowSums.length; i++) {
-            sumOfSquares += arrayOfRowSums[i];
             if (arrayOfRowSums[i] == 3) {
                 resetGame();
                 return alert("You won!");
             } else if (arrayOfRowSums[i] == 15) {
                 resetGame();
                 return alert("You lost!");
-            } //else if () {
-              //  resetGame();
-              //  return alert("Draw!");
-            //}
-        } 
-        console.log(sumOfSquares);
+            }
+        }
+        // Iterate over each square to check for unused then check for draw
+        for (var j = 0; j < 9; j++) {
+            if (gameBoard[j] == 0) {
+                sumOfGrid++;
+            }
+        }
+        if (sumOfGrid == 0) {
+            resetGame();
+            alert("Draw!");
+        }
     }
 
     function resetGame() {
