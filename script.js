@@ -55,7 +55,7 @@ window.onload = function () {
     }
 
     function firstComputerMove() {
-        var firstMoveSet = [squareOne, squareThree, squareFive, squareSeven, squareNine],
+        var firstMoveSet = [squareOne, squareThree, squareSeven, squareNine],
             firstMove = Math.floor(Math.random() * firstMoveSet.length - 1);  
         firstMoveSet[firstMove].innerHTML = computerPlayer;
         if (firstMove == 0) {
@@ -63,10 +63,8 @@ window.onload = function () {
         } else if (firstMove == 1) {
             gameBoard[2] = 5;
         } else if (firstMove == 2) {
-            gameBoard[4] = 5;
-        } else if (firstMove == 3) {
             gameBoard[6] = 5;
-        } else if (firstMove == 4) {
+        } else if (firstMove == 3) {
             gameBoard[8] = 5;
         }
     }
