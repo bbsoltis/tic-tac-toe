@@ -116,23 +116,24 @@ window.onload = function () {
             sumOfColThree = gameBoard[2] + gameBoard[5] + gameBoard[8],
             sumOfDiaOne = gameBoard[0] + gameBoard[4] + gameBoard[8],
             sumOfDiaTwo = gameBoard[2] + gameBoard[4] + gameBoard[6],
-            unusedSquares = 0;
             arrayOfRowSums = [sumOfRowOne, sumOfRowTwo, sumOfRowThree, sumOfColOne,
                 sumOfColTwo, sumOfColThree, sumOfDiaOne, sumOfDiaTwo],
             sumOfSquares = 0;
             
         for (var i = 0; i < arrayOfRowSums.length; i++) {
+            sumOfSquares += arrayOfRowSums[i];
             if (arrayOfRowSums[i] == 3) {
                 resetGame();
                 return alert("You won!");
             } else if (arrayOfRowSums[i] == 15) {
                 resetGame();
                 return alert("You lost!");
-            } else if () {
-                resetGame();
-                return alert("Draw!");
-            }
+            } //else if () {
+              //  resetGame();
+              //  return alert("Draw!");
+            //}
         } 
+        console.log(sumOfSquares);
     }
 
     function resetGame() {
@@ -151,6 +152,7 @@ window.onload = function () {
         realPlayer = "";
         computerPlayer = "";
         gameStarted = false;
+        checkForWinner();
     }
 
 }
