@@ -14,7 +14,7 @@ window.onload = function () {
         playerOneToken = "",
         computerToken = "",
         gameStarted = false,
-        // Non-standard object formatting used to mimic game grid
+        // Non-standard object formatting used to mimic structure of game grid
         gameBoard = {
             0:0, 1:0, 2:0,
             3:0, 4:0, 5:0,
@@ -50,9 +50,9 @@ window.onload = function () {
     document.getElementById('reset-btn').onclick = resetGame;
     
     // Iterate through squares to set click event 
-    for (var i = 0; i < arrayOfSquareVar.length; i++) {
-        arrayOfSquareVar[i].onclick = playerOneMove;
-    }
+    // for (var i = 0; i < arrayOfSquareVar.length; i++) {
+    //     arrayOfSquareVar[i].onclick = playerOneMove;
+    // }
 
     function whoGoFirst() {
         if (Math.floor(Math.random() * 2) == 0) {
@@ -100,7 +100,8 @@ window.onload = function () {
         }, 0);
     }
 
-    function playerOneMove() {
+for (var i = 0; i < arrayOfSquareVar.length; i++) {
+    arrayOfSquareVar[i].onclick = function playerOneMove() {
         if (this.innerHTML != "") {
             return;
         }
@@ -112,8 +113,10 @@ window.onload = function () {
                 }
             }
         }
+
         regularComputerMove();
     }
+}
 
     // Function to check if there is a winner
     function checkForWinner() {
