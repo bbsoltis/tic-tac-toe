@@ -90,7 +90,7 @@ window.onload = function () {
             var num = Math.floor(Math.random() * 9);
             if (arrayOfSquareVar[num].innerHTML == "") {
                 arrayOfSquareVar[num].innerHTML = computerToken;
-                gameBoard[num] = 5;
+                gameBoard[num] = computerToken;
                 playerOneReady();
             } else {
                 regularComputerMove();
@@ -111,7 +111,7 @@ window.onload = function () {
         for (var i = 0; i < arrayOfSquareVar.length; i++) {
             if (gameStarted == true) {
                 if (this == arrayOfSquareVar[i]) {
-                    gameBoard[i] = 1;
+                    gameBoard[i] = playerOneToken;
                     this.innerHTML = playerOneToken;
                 }
             }
