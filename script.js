@@ -72,7 +72,6 @@ window.onload = function () {
     function regularComputerMove() {
         setTimeout(function () {
             checkForWinner();
-            var num = Math.floor(Math.random() * 9);
             if (arrayOfSquareVar[num].innerHTML == "") {
                 arrayOfSquareVar[num].innerHTML = computerPlayer;
                 gameBoard[num] = 5;
@@ -103,6 +102,8 @@ window.onload = function () {
         }
         regularComputerMove();
     }
+
+    
 
     // Function to check if there is a winner
     function checkForWinner() {
