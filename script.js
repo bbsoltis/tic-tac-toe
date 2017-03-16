@@ -14,12 +14,22 @@ window.onload = function () {
         playerOneToken = "",
         computerToken = "",
         gameStarted = false,
-        // Non-standard object formatting used to visualize game grid
+        // Non-standard object formatting used to mimic game grid
         gameBoard = {
             0:0, 1:0, 2:0,
             3:0, 4:0, 5:0,
             6:0, 7:0, 8:0
-        };
+        },
+        winningCombos = [
+            [ gameBoard[0], gameBoard[1], gameBoard[2] ],
+            [ gameBoard[3], gameBoard[4], gameBoard[5] ],
+            [ gameBoard[6], gameBoard[7], gameBoard[8] ],
+            [ gameBoard[0], gameBoard[3], gameBoard[6] ],
+            [ gameBoard[1], gameBoard[4], gameBoard[7] ],
+            [ gameBoard[2], gameBoard[5], gameBoard[8] ],
+            [ gameBoard[0], gameBoard[4], gameBoard[8] ],
+            [ gameBoard[2], gameBoard[4], gameBoard[6] ]
+        ];
 
     resetGame();
 
@@ -136,7 +146,7 @@ window.onload = function () {
               //  return alert("Draw!");
             //}
         } 
-        console.log(sumOfSquares);
+        console.log(gameBoard);
     }
 
     function resetGame() {
