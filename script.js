@@ -9,40 +9,44 @@ window.onload = function () {
         squareSeven = document.getElementById('seven');
         squareEight = document.getElementById('eight'),
         squareNine = document.getElementById('nine'),
-        realPlayer = "",
-        computerPlayer = "",
+        arrayOfSquareVar = [ squareOne, squareTwo, squareThree, squareFour, squareFive, 
+            squareSix, squareSeven, squareEight, squareNine ],
+        playerOneToken = "",
+        computerToken = "",
         gameStarted = false,
-        gameBoard = {},
-        arrayOfSquareVar = [squareOne, squareTwo, squareThree, squareFour, squareFive,
-            squareSix, squareSeven, squareEight, squareNine
-        ];
+        // Non-standard object formatting used to visualize game grid
+        gameBoard = {
+            0:0, 1:0, 2:0,
+            3:0, 4:0, 5:0,
+            6:0, 7:0, 8:0
+        };
 
     resetGame();
 
     document.getElementById('x-btn').onclick = function () {
         resetGame();
-        realPlayer = "X";
-        computerPlayer = "O";
+        playerOneToken = "X";
+        computerToken = "O";
         whoGoFirst();
     }
 
     document.getElementById('o-btn').onclick = function () {
         resetGame();
-        realPlayer = "O";
-        computerPlayer = "X";
+        playerOneToken = "O";
+        computerToken = "X";
         whoGoFirst();
     }
 
     document.getElementById('reset-btn').onclick = resetGame;
-    document.getElementById('one').onclick = realPlayerMove;
-    document.getElementById('two').onclick = realPlayerMove;
-    document.getElementById('three').onclick = realPlayerMove;
-    document.getElementById('four').onclick = realPlayerMove;
-    document.getElementById('five').onclick = realPlayerMove;
-    document.getElementById('six').onclick = realPlayerMove;
-    document.getElementById('seven').onclick = realPlayerMove;
-    document.getElementById('eight').onclick = realPlayerMove;
-    document.getElementById('nine').onclick = realPlayerMove;
+    document.getElementById('one').onclick = playerOneMove;
+    document.getElementById('two').onclick = playerOneMove;
+    document.getElementById('three').onclick = playerOneMove;
+    document.getElementById('four').onclick = playerOneMove;
+    document.getElementById('five').onclick = playerOneMove;
+    document.getElementById('six').onclick = playerOneMove;
+    document.getElementById('seven').onclick = playerOneMove;
+    document.getElementById('eight').onclick = playerOneMove;
+    document.getElementById('nine').onclick = playerOneMove;
 
     function whoGoFirst() {
         if (Math.floor(Math.random() * 2) == 0) {
@@ -55,20 +59,19 @@ window.onload = function () {
     }
 
     function firstComputerMove() {
-        var firstMoveSet = [squareOne, squareThree, squareFive, squareSeven, squareNine],
+        var firstMoveSet = [squareOne, squareThree, squareSeven, squareNine],
             firstMove = Math.floor(Math.random() * firstMoveSet.length - 1);  
-        firstMoveSet[firstMove].innerHTML = computerPlayer;
+        firstMoveSet[firstMove].innerHTML = computerToken;
         if (firstMove == 0) {
-            gameBoard[0] = 5;
+            gameBoard[0] = computerToken;
         } else if (firstMove == 1) {
-            gameBoard[2] = 5;
+            gameBoard[2] = computerToken;
         } else if (firstMove == 2) {
-            gameBoard[4] = 5;
+            gameBoard[6] = computerToken;
         } else if (firstMove == 3) {
-            gameBoard[6] = 5;
-        } else if (firstMove == 4) {
-            gameBoard[8] = 5;
+            gameBoard[8] = computerToken;
         }
+        console.log(gameBoard);
     }
 
     function regularComputerMove() {
@@ -76,22 +79,22 @@ window.onload = function () {
             checkForWinner();
             var num = Math.floor(Math.random() * 9);
             if (arrayOfSquareVar[num].innerHTML == "") {
-                arrayOfSquareVar[num].innerHTML = computerPlayer;
+                arrayOfSquareVar[num].innerHTML = computerToken;
                 gameBoard[num] = 5;
-                realPlayerReady();
+                playerOneReady();
             } else {
                 regularComputerMove();
             }
         }, 300);
     }
 
-    function realPlayerReady() {
+    function playerOneReady() {
         setTimeout(function () {
             checkForWinner();
         }, 0);
     }
 
-    function realPlayerMove() {
+    function playerOneMove() {
         if (this.innerHTML != "") {
             return;
         }
@@ -99,7 +102,7 @@ window.onload = function () {
             if (gameStarted == true) {
                 if (this == arrayOfSquareVar[i]) {
                     gameBoard[i] = 1;
-                    this.innerHTML = realPlayer;
+                    this.innerHTML = playerOneToken;
                 }
             }
         }
@@ -149,8 +152,8 @@ window.onload = function () {
         squareSeven.innerHTML = "";
         squareEight.innerHTML = "";
         squareNine.innerHTML = "";
-        realPlayer = "";
-        computerPlayer = "";
+        playerOne = "";
+        computerToken = "";
         gameStarted = false;
         checkForWinner();
     }
