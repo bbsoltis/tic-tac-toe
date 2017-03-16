@@ -48,15 +48,11 @@ window.onload = function () {
     }
 
     document.getElementById('reset-btn').onclick = resetGame;
-    document.getElementById('one').onclick = playerOneMove;
-    document.getElementById('two').onclick = playerOneMove;
-    document.getElementById('three').onclick = playerOneMove;
-    document.getElementById('four').onclick = playerOneMove;
-    document.getElementById('five').onclick = playerOneMove;
-    document.getElementById('six').onclick = playerOneMove;
-    document.getElementById('seven').onclick = playerOneMove;
-    document.getElementById('eight').onclick = playerOneMove;
-    document.getElementById('nine').onclick = playerOneMove;
+    
+    // Iterate through squares to set click event 
+    for (var i = 0; i < arrayOfSquareVar.length; i++) {
+        arrayOfSquareVar[i].onclick = playerOneMove;
+    }
 
     function whoGoFirst() {
         if (Math.floor(Math.random() * 2) == 0) {
