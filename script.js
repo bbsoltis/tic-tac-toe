@@ -77,17 +77,16 @@ window.onload = function () {
 
     function regularComputerMove() {
         setTimeout(function () {
-                checkForWinner();
-                for (var i = 0; i < arrayOfSquareVar.length; i++) {
-                    if (arrayOfSquareVar[num].innerHTML == "") {
-                        arrayOfSquareVar[num].innerHTML = computerToken;
-                        gameBoard[num] = computerToken;
-                        playerOneReady();
-                    } else {
-                        regularComputerMove();
-                    }
-                }, 300);
-        }
+            checkForWinner();
+            var num = Math.floor(Math.random() * 9);
+                if (arrayOfSquareVar[num].innerHTML == "") {
+                    arrayOfSquareVar[num].innerHTML = computerToken;
+                    gameBoard[num] = computerToken;
+                    playerOneReady();
+                } else {
+                    regularComputerMove();
+                }
+        }, 300);
     }
 
     function playerOneReady() {
