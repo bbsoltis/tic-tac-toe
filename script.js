@@ -48,11 +48,6 @@ window.onload = function () {
     }
 
     document.getElementById('reset-btn').onclick = resetGame;
-    
-    // Iterate through squares to set click event 
-    // for (var i = 0; i < arrayOfSquareVar.length; i++) {
-    //     arrayOfSquareVar[i].onclick = playerOneMove;
-    // }
 
     function whoGoFirst() {
         if (Math.floor(Math.random() * 2) == 0) {
@@ -82,15 +77,17 @@ window.onload = function () {
 
     function regularComputerMove() {
         setTimeout(function () {
-            checkForWinner();
-            if (arrayOfSquareVar[num].innerHTML == "") {
-                arrayOfSquareVar[num].innerHTML = computerToken;
-                gameBoard[num] = computerToken;
-                playerOneReady();
-            } else {
-                regularComputerMove();
-            }
-        }, 300);
+                checkForWinner();
+                for (var i = 0; i < arrayOfSquareVar.length; i++) {
+                    if (arrayOfSquareVar[num].innerHTML == "") {
+                        arrayOfSquareVar[num].innerHTML = computerToken;
+                        gameBoard[num] = computerToken;
+                        playerOneReady();
+                    } else {
+                        regularComputerMove();
+                    }
+                }, 300);
+        }
     }
 
     function playerOneReady() {
@@ -116,8 +113,6 @@ for (var i = 0; i < arrayOfSquareVar.length; i++) {
         regularComputerMove();
     }
 }
-
-    
 
     // Function to check if there is a winner
     function checkForWinner() {
