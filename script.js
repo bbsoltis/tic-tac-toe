@@ -17,15 +17,9 @@ window.onload = function () {
         gameStarted = false,
         // Non-standard object formatting used to mimic structure of game grid
         gameBoard = {
-            0: 0,
-            1: 0,
-            2: 0,
-            3: 0,
-            4: 0,
-            5: 0,
-            6: 0,
-            7: 0,
-            8: 0
+            0: 0, 1: 0, 2: 0,
+            3: 0, 4: 0, 5: 0,
+            6: 0, 7: 0, 8: 0
         },
         winningCombos = [];
 
@@ -54,6 +48,7 @@ window.onload = function () {
         } else {
             alert("You go first!");
         }
+        gameStarted = true;
     }
 
     function firstComputerMove() {
@@ -75,7 +70,6 @@ window.onload = function () {
         setTimeout(function () {
             checkForWinner();
             var num = Math.floor(Math.random() * 9);
-
             if (arrayOfSquareVar[num].innerHTML == "") {
                 arrayOfSquareVar[num].innerHTML = computerToken;
                 gameBoard[num] = computerToken;
@@ -83,15 +77,6 @@ window.onload = function () {
             } else {
                 regularComputerMove();
             }
-
-                if (arrayOfSquareVar[num].innerHTML == "") {
-                    arrayOfSquareVar[num].innerHTML = computerToken;
-                    gameBoard[num] = computerToken;
-                    playerOneReady();
-                } else {
-                    regularComputerMove();
-                }
-
         }, 300);
     }
 
@@ -118,7 +103,6 @@ window.onload = function () {
         }
     }
 
-}
 
 
     // Function to check if there is a winner
@@ -134,14 +118,16 @@ window.onload = function () {
             [gameBoard[2], gameBoard[4], gameBoard[6]]
         ];
         for (var i = 0; i < winningCombos.length; i++) {
-            if (winningCombos[i][0] == playerOneToken && winningCombos[i][1] == playerOneToken && winningCombos[i][2] == playerOneToken) {
+            if (winningCombos[i][0] === playerOneToken && winningCombos[i][1] === playerOneToken
+                && winningCombos[i][2] === playerOneToken) {
                 resetGame();
                 return alert("You Won!");
-            } else if (winningCombos[i][0] == computerToken && winningCombos[i][1] == computerToken && winningCombos[i][2] == computerToken) {
+            } else if (winningCombos[i][0] === computerToken && winningCombos[i][1] === computerToken && winningCombos[i][2] === computerToken) {
                 resetGame();
                 return alert("You Lost!");
             }
         }
+        return;
     }
 
     function resetGame() {
