@@ -75,6 +75,7 @@ window.onload = function () {
         setTimeout(function () {
             checkForWinner();
             var num = Math.floor(Math.random() * 9);
+
             if (arrayOfSquareVar[num].innerHTML == "") {
                 arrayOfSquareVar[num].innerHTML = computerToken;
                 gameBoard[num] = computerToken;
@@ -82,6 +83,15 @@ window.onload = function () {
             } else {
                 regularComputerMove();
             }
+
+                if (arrayOfSquareVar[num].innerHTML == "") {
+                    arrayOfSquareVar[num].innerHTML = computerToken;
+                    gameBoard[num] = computerToken;
+                    playerOneReady();
+                } else {
+                    regularComputerMove();
+                }
+
         }, 300);
     }
 
@@ -107,6 +117,9 @@ window.onload = function () {
             regularComputerMove();
         }
     }
+
+}
+
 
     // Function to check if there is a winner
     function checkForWinner() {
