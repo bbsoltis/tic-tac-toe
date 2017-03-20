@@ -24,7 +24,7 @@ window.onload = function () {
         winningCombos = [];
 
     resetGame();
-
+    
     document.getElementById('x-btn').onclick = function () {
         resetGame();
         playerOneToken = "X";
@@ -52,18 +52,11 @@ window.onload = function () {
     }
 
     function firstComputerMove() {
-        var firstMoveSet = [squareOne, squareThree, squareSeven, squareNine],
-            firstMove = Math.floor(Math.random() * firstMoveSet.length - 1);
-        firstMoveSet[firstMove].innerHTML = computerToken;
-        if (firstMove == 0) {
-            gameBoard[0] = computerToken;
-        } else if (firstMove == 1) {
-            gameBoard[2] = computerToken;
-        } else if (firstMove == 2) {
-            gameBoard[6] = computerToken;
-        } else if (firstMove == 3) {
-            gameBoard[8] = computerToken;
-        }
+        var firstMoveSet = [0, 2, 6, 8],
+            firstMoveIndex = Math.floor(Math.random() * 4),
+            firstMove = firstMoveSet[firstMoveIndex];
+            gameBoard[firstMove] = computerToken;
+        setsGameTokens(computerToken, firstMove);
     }
 
     function regularComputerMove() {
@@ -71,8 +64,8 @@ window.onload = function () {
             checkForWinner();
             var num = Math.floor(Math.random() * 9);
             if (arrayOfSquareVar[num].innerHTML == "") {
-                arrayOfSquareVar[num].innerHTML = computerToken;
                 gameBoard[num] = computerToken;
+                setsGameTokens(computerToken, num);
                 playerOneReady();
             } else {
                 regularComputerMove();
@@ -95,15 +88,17 @@ window.onload = function () {
                 if (gameStarted == true) {
                     if (this == arrayOfSquareVar[i]) {
                         gameBoard[i] = playerOneToken;
-                        this.innerHTML = playerOneToken;
-                    }
+                        setsGameTokens(playerOneToken, i);
+                    } 
                 }
             }
             regularComputerMove();
         }
     }
 
-
+function setsGameTokens(token, index) {
+            return arrayOfSquareVar[index].innerHTML = token;
+}
 
     // Function to check if there is a winner
     function checkForWinner() {
@@ -122,7 +117,7 @@ window.onload = function () {
                 if (gameBoard[j] == 0) {
                     emptySquares++;
                 }
-            }
+            }   
         for (var i = 0; i < winningCombos.length; i++) {
             if (winningCombos[i][0] === playerOneToken && winningCombos[i][1] === playerOneToken &&
                 winningCombos[i][2] === playerOneToken) {
