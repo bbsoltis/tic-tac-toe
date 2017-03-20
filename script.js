@@ -107,6 +107,7 @@ window.onload = function () {
 
     // Function to check if there is a winner
     function checkForWinner() {
+        var emptySquares = 0;
         winningCombos = [
             [gameBoard[0], gameBoard[1], gameBoard[2]],
             [gameBoard[3], gameBoard[4], gameBoard[5]],
@@ -117,18 +118,26 @@ window.onload = function () {
             [gameBoard[0], gameBoard[4], gameBoard[8]],
             [gameBoard[2], gameBoard[4], gameBoard[6]]
         ];
+        for (var j = 0; j < 9; j++) {
+                if (gameBoard[j] == 0) {
+                    emptySquares++;
+                }
+            }
         for (var i = 0; i < winningCombos.length; i++) {
-            if (winningCombos[i][0] === playerOneToken && winningCombos[i][1] === playerOneToken
-                && winningCombos[i][2] === playerOneToken) {
+            if (winningCombos[i][0] === playerOneToken && winningCombos[i][1] === playerOneToken &&
+                winningCombos[i][2] === playerOneToken) {
                 resetGame();
                 return alert("You Won!");
             } else if (winningCombos[i][0] === computerToken && winningCombos[i][1] === computerToken && winningCombos[i][2] === computerToken) {
                 resetGame();
                 return alert("You Lost!");
+            } else if (emptySquares === 0) {
+                resetGame();
+                return alert("Draw!");
             }
         }
         return;
-    }
+        }
 
     function resetGame() {
         for (var i = 0; i < 9; i++) {
