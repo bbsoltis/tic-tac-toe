@@ -15,12 +15,18 @@ window.onload = function () {
         playerOneToken = "",
         computerToken = "",
         gameStarted = false,
-        // Non-standard object formatting used to mimic structure of game grid
         gameBoard = {
-            0: 0, 1: 0, 2: 0,
-            3: 0, 4: 0, 5: 0,
-            6: 0, 7: 0, 8: 0
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0,
+            6: 0,
+            7: 0,
+            8: 0
         },
+        
         winningCombos = [];
 
     resetGame();
@@ -100,7 +106,6 @@ function setsGameTokens(token, index) {
             return arrayOfSquareVar[index].innerHTML = token;
 }
 
-    // Function to check if there is a winner
     function checkForWinner() {
         var emptySquares = 0;
         winningCombos = [
@@ -114,7 +119,7 @@ function setsGameTokens(token, index) {
             [gameBoard[2], gameBoard[4], gameBoard[6]]
         ];
         for (var j = 0; j < 9; j++) {
-                if (gameBoard[j] == 0) {
+                if (gameBoard[j] !== 0) {
                     emptySquares++;
                 }
             }   
@@ -132,7 +137,7 @@ function setsGameTokens(token, index) {
             }
         }
         return;
-        }
+    }
 
     function resetGame() {
         for (var i = 0; i < 9; i++) {
@@ -150,7 +155,6 @@ function setsGameTokens(token, index) {
         playerOne = "";
         computerToken = "";
         gameStarted = false;
-        //checkForWinner();
     }
 
 }
