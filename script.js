@@ -1,6 +1,5 @@
 window.onload = function () {
-
-    var squareOne = document.getElementById('one'),
+    const squareOne = document.getElementById('one'),
         squareTwo = document.getElementById('two'),
         squareThree = document.getElementById('three'),
         squareFour = document.getElementById('four'),
@@ -11,8 +10,8 @@ window.onload = function () {
         squareNine = document.getElementById('nine'),
         arrayOfSquareVar = [squareOne, squareTwo, squareThree, squareFour, squareFive,
             squareSix, squareSeven, squareEight, squareNine
-        ],
-        playerOneToken = "",
+        ];
+    let playerOneToken = "",
         computerToken = "",
         gameStarted = false,
         gameBoard = {
@@ -26,7 +25,6 @@ window.onload = function () {
             7: 0,
             8: 0
         },
-        
         winningCombos = [];
 
     resetGame();
@@ -58,17 +56,17 @@ window.onload = function () {
     }
 
     function firstComputerMove() {
-        var firstMoveSet = [0, 2, 6, 8],
-            firstMoveIndex = Math.floor(Math.random() * 4),
-            firstMove = firstMoveSet[firstMoveIndex];
-            gameBoard[firstMove] = computerToken;
+        const firstMoveSet = [0, 2, 6, 8];
+          let firstMoveIndex = Math.floor(Math.random() * 4),
+              firstMove = firstMoveSet[firstMoveIndex];
+        gameBoard[firstMove] = computerToken;
         setsGameTokens(computerToken, firstMove);
     }
 
     function regularComputerMove() {
         setTimeout(function () {
             checkForWinner();
-            var num = Math.floor(Math.random() * 9);
+            let num = Math.floor(Math.random() * 9);
             if (arrayOfSquareVar[num].innerHTML == "") {
                 gameBoard[num] = computerToken;
                 setsGameTokens(computerToken, num);
@@ -78,6 +76,18 @@ window.onload = function () {
             }
         }, 300);
     }
+
+
+    function blockOrWin() {
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 3; j++) {
+                if (winningCombos[i][j] !== 0) {
+                    
+                }
+            }
+        }
+    }
+
 
     function playerOneReady() {
         setTimeout(function () {
@@ -90,7 +100,7 @@ window.onload = function () {
             if (this.innerHTML != "") {
                 return;
             }
-            for (var i = 0; i < arrayOfSquareVar.length; i++) {
+            for (let i = 0; i < arrayOfSquareVar.length; i++) {
                 if (gameStarted == true) {
                     if (this == arrayOfSquareVar[i]) {
                         gameBoard[i] = playerOneToken;
@@ -107,7 +117,7 @@ function setsGameTokens(token, index) {
 }
 
     function checkForWinner() {
-        var emptySquares = 0;
+        let emptySquares = 0;
         winningCombos = [
             [gameBoard[0], gameBoard[1], gameBoard[2]],
             [gameBoard[3], gameBoard[4], gameBoard[5]],
@@ -118,12 +128,12 @@ function setsGameTokens(token, index) {
             [gameBoard[0], gameBoard[4], gameBoard[8]],
             [gameBoard[2], gameBoard[4], gameBoard[6]]
         ];
-        for (var j = 0; j < 9; j++) {
+        for (let j = 0; j < 9; j++) {
                 if (gameBoard[j] !== 0) {
                     emptySquares++;
                 }
             }   
-        for (var i = 0; i < winningCombos.length; i++) {
+        for (let i = 0; i < winningCombos.length; i++) {
             if (winningCombos[i][0] === playerOneToken && winningCombos[i][1] === playerOneToken &&
                 winningCombos[i][2] === playerOneToken) {
                 resetGame();
