@@ -45,34 +45,69 @@ window.onload = function () {
 
     document.getElementById('reset-btn').onclick = resetGame;
 
+    // Randomizes which player goes first
     function whoGoFirst() {
         if (Math.floor(Math.random() * 2) == 0) {
             alert("Computer goes first!");
-            computerTurn();
+            computerReady();
         } else {
             alert("You go first!");
         }
         gameStarted = true;
     }
 
+    
+    // Determines computer's next move
+    function computerTurn() {
+        let moveIndex;
+        // blockOrWin()
+            // is their 2-in-a-row in winningCombos?
+            // 3rd square isSquareEmpty()?
+            // assigns a value to moveIndex if there is a move
+            // does not assign a value if no move
+            // returns a boolean
+        // if (blockOrWin) {
+            // returns without assigning 
+            // } else {
+                // determinesMove()
+                // based on prioritized list
+                // isSquareEmpty();
+                // assigns a value to moveIndex
+            // }
+        // setsGameTokens(computerToken, moveIndex);
+        // playerReady();
+        // }
+        
+    }
 
 
-// Look for block or win
-// Determine move
-// Determine if move square is empty
-// If empty, place token
-    // If not, move one to next highest priority square
-// Check for winner (helper function)
-    // If no winner, move on to player
 
+    // Determine if a square is empty
+     function isSquareEmpty(index) {
+        if (gameBoard[index] == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    // Delays move for more realistic play and
+    // prevents ending game before token appears in DOM
+    function computerReady() {
+        setTimeout(function () {
+            checkForWinner();
+            computerTurn();
+        }, 300);
+    }
 
+    // prevents ending game before token appears in DOM
     function playerReady() {
         setTimeout(function () {
             checkForWinner();
         }, 0);
     }
 
+    // onclick function to place player token on gameBoard
     for (let i = 0; i < arrayOfSquareVar.length; i++) {
         arrayOfSquareVar[i].onclick = function playerMove() {
             if (this.innerHTML != "") {
@@ -86,15 +121,17 @@ window.onload = function () {
                     } 
                 }
             }
-            computerTurn();
+            computerReady();
         }
     }
 
+    // Places tokens on gameBoard based on arguments when called
     function setsGameTokens(token, index) {
         gameBoard[index] = token;
         return arrayOfSquareVar[index].innerHTML = token;
     }
 
+    // Ends game if anyone has a winning move
     function checkForWinner() {
         let emptySquares = 0;
         winningCombos = [
@@ -129,6 +166,7 @@ window.onload = function () {
         return;
     }
 
+    // Resets global variables back to defaults
     function resetGame() {
         for (let i = 0; i < 9; i++) {
             gameBoard[i] = 0;
