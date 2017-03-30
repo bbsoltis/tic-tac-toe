@@ -27,7 +27,6 @@ window.onload = function () {
         };
 
     resetGame();
-    blockOrWin();
     
     document.getElementById('x-btn').onclick = function () {
         resetGame();
@@ -47,12 +46,12 @@ window.onload = function () {
 
     // Randomizes which player goes first
     function whoGoFirst() {
-        if (Math.floor(Math.random() * 2) == 0) {
-            alert("Computer goes first!");
-            computerReady();
-        } else {
+        // if (Math.floor(Math.random() * 2) == 0) {
+            // alert("Computer goes first!");
+            // computerReady();
+        // } else {
             alert("You go first!");
-        }
+        // }
         gameStarted = true;
     }
 
@@ -85,41 +84,40 @@ window.onload = function () {
         let firstSquare,
             secondSquare,
             thirdSquare,
-            winningCombos = [
-                [gameBoard[0], gameBoard[1], gameBoard[2]],
-                [gameBoard[3], gameBoard[4], gameBoard[5]],
-                [gameBoard[6], gameBoard[7], gameBoard[8]],
-                [gameBoard[0], gameBoard[3], gameBoard[6]],
-                [gameBoard[1], gameBoard[4], gameBoard[7]],
-                [gameBoard[2], gameBoard[5], gameBoard[8]],
-                [gameBoard[0], gameBoard[4], gameBoard[8]],
-                [gameBoard[2], gameBoard[4], gameBoard[6]]
+            arrayOfFirstSquares = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
             ];
 
-        for (let i = 0; i < 8; i++) {
-            firstSquare = winningCombos[i][0];
-            secondSquare = winningCombos[i][1];
-            thirdSquare = winningCombos[i][2];
+        for (let i = 0; i < arrayOfFirstSquares.length; i++) {
+            firstSquare = arrayOfFirstSquares[i][0];
+            secondSquare = arrayOfFirstSquares[i][1];
+            thirdSquare = arrayOfFirstSquares[i][2];
 
-            if (firstSquare !== 0 && thirdSquare === firstSquare) {
-                if (isSquareEmpty(secondSquare)) {
+            if (gameBoard[firstSquare] !== 0 && gameBoard[thirdSquare] === gameBoard[firstSquare]) {
+                if (gameBoard[secondSquare] === 0) {
                     setsGameTokens(computerToken, secondSquare);
                     return true;
                 }
-            } else if (firstSquare !== 0 && secondSquare === firstSquare) {
-                if (isSquareEmpty(thirdSquare)) {
+            } else if (gameBoard[firstSquare] !== 0 && gameBoard[secondSquare] === gameBoard[firstSquare]) {
+                if (gameBoard[thirdSquare] === 0) {
                     setsGameTokens(computerToken, thirdSquare);
                     return true;
                 }
-            } else if (secondSquare !== 0 && thirdSquare === secondSquare) {
-                if (isSquareEmpty(firstSquare)) {
+            } else if (gameBoard[secondSquare] !== 0 && gameBoard[thirdSquare] === gameBoard[secondSquare]) {
+                if (gameBoard[firstSquare] === 0) {
                     setsGameTokens(computerToken, firstSquare);
                     return true;
                 }
-            } else {
-                return false;
-            }
+            } 
         }
+        return false;
     }
 
 
@@ -162,7 +160,7 @@ window.onload = function () {
                     } 
                 }
             }
-            computerTurn();
+            computerReady();
         }
     }
 
