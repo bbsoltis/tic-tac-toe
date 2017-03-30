@@ -54,29 +54,15 @@ window.onload = function () {
         // }
         gameStarted = true;
     }
-
     
     // Determines computer's next move
     function computerTurn() {
-        let moveIndex;
-        blockOrWin();
-            // is their 2-in-a-row in winningCombos?
-            // 3rd square isSquareEmpty()?
-            // assigns a value to moveIndex if there is a move
-            // does not assign a value if no move
-            // returns a boolean
-        // if (blockOrWin) {
-            // returns without assigning 
-            // } else {
-                // determinesMove()
-                // based on prioritized list
-                // isSquareEmpty();
-                // assigns a value to moveIndex
-            // }
-        //setsGameTokens(computerToken, moveIndex);
-        playerReady();
-        // }
-        
+        if (blockOrWin()) {
+            playerReady();
+        } else {
+            determinesMove();
+            playerReady();
+        }
     }
 
     // Checks for 2-in-a-row to either block or win the game; returns a boolean
@@ -100,18 +86,18 @@ window.onload = function () {
             secondSquare = arrayOfFirstSquares[i][1];
             thirdSquare = arrayOfFirstSquares[i][2];
 
-            if (gameBoard[firstSquare] !== 0 && gameBoard[thirdSquare] === gameBoard[firstSquare]) {
-                if (gameBoard[secondSquare] === 0) {
+            if (!isSquareEmpty(firstSquare) && gameBoard[thirdSquare] === gameBoard[firstSquare]) {
+                if (isSquareEmpty(secondSquare)) {
                     setsGameTokens(computerToken, secondSquare);
                     return true;
                 }
-            } else if (gameBoard[firstSquare] !== 0 && gameBoard[secondSquare] === gameBoard[firstSquare]) {
-                if (gameBoard[thirdSquare] === 0) {
+            } else if (!isSquareEmpty(firstSquare) && gameBoard[secondSquare] === gameBoard[firstSquare]) {
+                if (isSquareEmpty(thirdSquare)) {
                     setsGameTokens(computerToken, thirdSquare);
                     return true;
                 }
-            } else if (gameBoard[secondSquare] !== 0 && gameBoard[thirdSquare] === gameBoard[secondSquare]) {
-                if (gameBoard[firstSquare] === 0) {
+            } else if (!isSquareEmpty(secondSquare) && gameBoard[thirdSquare] === gameBoard[secondSquare]) {
+                if (isSquareEmpty(firstSquare)) {
                     setsGameTokens(computerToken, firstSquare);
                     return true;
                 }
@@ -120,6 +106,17 @@ window.onload = function () {
         return false;
     }
 
+    // Determines move priority if no block win move
+    function determinesMove() {
+        const movePriority = [0, 2, 6, 4, 8, 1 ,3, 5 ,7];
+        for (let i = 0; i < movePriority.length; i++) {
+            let moveIndex = movePriority[i];
+            if (isSquareEmpty(moveIndex)) {
+                return setsGameTokens(computerToken, moveIndex);
+            }
+        }
+        return;
+    }
 
     // Determine if a square is empty
      function isSquareEmpty(index) {
