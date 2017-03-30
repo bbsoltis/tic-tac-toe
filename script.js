@@ -46,12 +46,12 @@ window.onload = function () {
 
     // Randomizes which player goes first
     function whoGoFirst() {
-        // if (Math.floor(Math.random() * 2) == 0) {
-            // alert("Computer goes first!");
-            // computerReady();
-        // } else {
+        if (Math.floor(Math.random() * 2) == 0) {
+            alert("Computer goes first!");
+            computerTurn();
+        } else {
             alert("You go first!");
-        // }
+        }
         gameStarted = true;
     }
     
@@ -110,7 +110,7 @@ window.onload = function () {
 
     // Determines move priority if no block win move
     function determinesMove() {
-        const movePriority = [0, 2, 6, 4, 8, 1 ,3, 5 ,7];
+        const movePriority = [0, 4, 6, 8, 2, 1 ,3, 5 ,7];
         for (let i = 0; i < movePriority.length; i++) {
             let moveIndex = movePriority[i];
             if (isSquareEmpty(moveIndex)) {
