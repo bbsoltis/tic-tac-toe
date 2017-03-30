@@ -59,11 +59,10 @@ window.onload = function () {
     function computerTurn() {
         setTimeout(function () {
             if (blockOrWin()) {
-                return;
             } else {
                 determinesMove();
-                return;
             }
+            checkForWinner();
         }, 300);
     }
 
@@ -142,7 +141,8 @@ window.onload = function () {
                         setsGameTokens(playerToken, i);
                     } 
                 }
-            }
+            } 
+            checkForWinner();
             computerTurn();
         }
     }
@@ -156,7 +156,7 @@ window.onload = function () {
     // Ends game if anyone has a winning move
     function checkForWinner() {
         setTimeout(function () {
-            let emptySquares = 0,
+            let filledSquares = 0,
                 winningCombos = [
                     [gameBoard[0], gameBoard[1], gameBoard[2]],
                     [gameBoard[3], gameBoard[4], gameBoard[5]],
@@ -168,8 +168,8 @@ window.onload = function () {
                     [gameBoard[2], gameBoard[4], gameBoard[6]]
                 ];
             for (let j = 0; j < 9; j++) {
-                if (gameBoard[j] !== 0) {
-                    emptySquares++;
+                if (gameBoard[j] != 0) {
+                    filledSquares++;
                 }
             }
             for (let i = 0; i < winningCombos.length; i++) {
@@ -181,7 +181,7 @@ window.onload = function () {
                     winningCombos[i][2] === computerToken) {
                     resetGame();
                     return alert("You Lost!");
-                } else if (emptySquares === 0) {
+                } else if (filledSquares == 9) {
                     resetGame();
                     return alert("Draw!");
                 }
