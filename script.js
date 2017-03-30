@@ -24,10 +24,10 @@ window.onload = function () {
             6: 0,
             7: 0,
             8: 0
-        },
-        winningCombos = [];
+        };
 
     resetGame();
+    blockOrWin();
     
     document.getElementById('x-btn').onclick = function () {
         resetGame();
@@ -60,7 +60,7 @@ window.onload = function () {
     // Determines computer's next move
     function computerTurn() {
         let moveIndex;
-        // blockOrWin()
+        blockOrWin();
             // is their 2-in-a-row in winningCombos?
             // 3rd square isSquareEmpty()?
             // assigns a value to moveIndex if there is a move
@@ -74,12 +74,53 @@ window.onload = function () {
                 // isSquareEmpty();
                 // assigns a value to moveIndex
             // }
-        // setsGameTokens(computerToken, moveIndex);
-        // playerReady();
+        //setsGameTokens(computerToken, moveIndex);
+        playerReady();
         // }
         
     }
 
+    // Checks for 2-in-a-row to either block or win the game; returns a boolean
+    function blockOrWin() {
+        let firstSquare,
+            secondSquare,
+            thirdSquare,
+            winningCombos = [
+                [gameBoard[0], gameBoard[1], gameBoard[2]],
+                [gameBoard[3], gameBoard[4], gameBoard[5]],
+                [gameBoard[6], gameBoard[7], gameBoard[8]],
+                [gameBoard[0], gameBoard[3], gameBoard[6]],
+                [gameBoard[1], gameBoard[4], gameBoard[7]],
+                [gameBoard[2], gameBoard[5], gameBoard[8]],
+                [gameBoard[0], gameBoard[4], gameBoard[8]],
+                [gameBoard[2], gameBoard[4], gameBoard[6]]
+            ];
+
+        for (let i = 0; i < 8; i++) {
+            firstSquare = winningCombos[i][0];
+            secondSquare = winningCombos[i][1];
+            thirdSquare = winningCombos[i][2];
+
+            if (firstSquare !== 0 && thirdSquare === firstSquare) {
+                if (isSquareEmpty(secondSquare)) {
+                    setsGameTokens(computerToken, secondSquare);
+                    return true;
+                }
+            } else if (firstSquare !== 0 && secondSquare === firstSquare) {
+                if (isSquareEmpty(thirdSquare)) {
+                    setsGameTokens(computerToken, thirdSquare);
+                    return true;
+                }
+            } else if (secondSquare !== 0 && thirdSquare === secondSquare) {
+                if (isSquareEmpty(firstSquare)) {
+                    setsGameTokens(computerToken, firstSquare);
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        }
+    }
 
 
     // Determine if a square is empty
@@ -121,7 +162,7 @@ window.onload = function () {
                     } 
                 }
             }
-            computerReady();
+            computerTurn();
         }
     }
 
@@ -133,17 +174,17 @@ window.onload = function () {
 
     // Ends game if anyone has a winning move
     function checkForWinner() {
-        let emptySquares = 0;
-        winningCombos = [
-            [gameBoard[0], gameBoard[1], gameBoard[2]],
-            [gameBoard[3], gameBoard[4], gameBoard[5]],
-            [gameBoard[6], gameBoard[7], gameBoard[8]],
-            [gameBoard[0], gameBoard[3], gameBoard[6]],
-            [gameBoard[1], gameBoard[4], gameBoard[7]],
-            [gameBoard[2], gameBoard[5], gameBoard[8]],
-            [gameBoard[0], gameBoard[4], gameBoard[8]],
-            [gameBoard[2], gameBoard[4], gameBoard[6]]
-        ];
+        let emptySquares = 0,
+            winningCombos = [
+                [gameBoard[0], gameBoard[1], gameBoard[2]],
+                [gameBoard[3], gameBoard[4], gameBoard[5]],
+                [gameBoard[6], gameBoard[7], gameBoard[8]],
+                [gameBoard[0], gameBoard[3], gameBoard[6]],
+                [gameBoard[1], gameBoard[4], gameBoard[7]],
+                [gameBoard[2], gameBoard[5], gameBoard[8]],
+                [gameBoard[0], gameBoard[4], gameBoard[8]],
+                [gameBoard[2], gameBoard[4], gameBoard[6]]
+            ];
         for (let j = 0; j < 9; j++) {
                 if (gameBoard[j] !== 0) {
                     emptySquares++;
@@ -168,9 +209,9 @@ window.onload = function () {
 
     // Resets global variables back to defaults
     function resetGame() {
-        for (let i = 0; i < 9; i++) {
-            gameBoard[i] = 0;
-        }
+        // for (let i = 0; i < 9; i++) {
+        //     gameBoard[i] = 0;
+        // }
         squareOne.innerHTML = "";
         squareTwo.innerHTML = "";
         squareThree.innerHTML = "";
