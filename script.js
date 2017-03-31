@@ -59,9 +59,9 @@ window.onload = function () {
     function computerTurn() {
         setTimeout(function () {
             if (blockOrWin()) {
-
+                // It's ok, nothing has to go here
             } else if (blocksForks()) {
-
+                // Here either...really
             } else {
                 determinesMove();
             }
