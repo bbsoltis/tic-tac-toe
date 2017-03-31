@@ -1,5 +1,5 @@
 window.onload = function () {
-    const squareOne = document.getElementById('one'),
+  const squareOne = document.getElementById('one'),
         squareTwo = document.getElementById('two'),
         squareThree = document.getElementById('three'),
         squareFour = document.getElementById('four'),
@@ -27,7 +27,7 @@ window.onload = function () {
         };
 
     resetGame();
-    
+
     document.getElementById('x-btn').onclick = function () {
         resetGame();
         playerToken = "X";
@@ -54,14 +54,14 @@ window.onload = function () {
         }
         gameStarted = true;
     }
-    
+
     // Determines computer's next move
     function computerTurn() {
         setTimeout(function () {
             if (blockOrWin()) {
-                
+
             } else if (blocksForks()) {
-                 
+
             } else {
                 determinesMove();
             }
@@ -110,11 +110,12 @@ window.onload = function () {
         return false;
     }
 
+    // If there is a potential fork, tries to block it
     function blocksForks() {
         const topLeftCorner = gameBoard[0],
-              topRightCorner = gameBoard[2],
-              botLeftCorner = gameBoard[6],
-              botRightCorner = gameBoard[8];
+            topRightCorner = gameBoard[2],
+            botLeftCorner = gameBoard[6],
+            botRightCorner = gameBoard[8];
 
         if (topLeftCorner == playerToken && botRightCorner == playerToken) {
             setsGameTokens(computerToken, 3);
@@ -122,13 +123,13 @@ window.onload = function () {
         } else if (topRightCorner == playerToken && botLeftCorner == playerToken) {
             setsGameTokens(computerToken, 1);
             return true;
-        }  
+        }
         return false;
     }
 
     // Determines move priority if no block win move
     function determinesMove() {
-        const movePriority = [4, 0, 8, 6, 2, 1 ,3, 5 ,7];
+        const movePriority = [4, 0, 8, 6, 2, 1, 3, 5, 7];
         for (let i = 0; i < movePriority.length; i++) {
             let moveIndex = movePriority[i];
             if (isSquareEmpty(moveIndex)) {
@@ -139,7 +140,7 @@ window.onload = function () {
     }
 
     // Determine if a square is empty
-     function isSquareEmpty(index) {
+    function isSquareEmpty(index) {
         if (gameBoard[index] == 0) {
             return true;
         } else {
@@ -158,9 +159,9 @@ window.onload = function () {
                     if (this == arrayOfSquareVar[i]) {
                         gameBoard[i] = playerToken;
                         setsGameTokens(playerToken, i);
-                    } 
+                    }
                 }
-            } 
+            }
             checkForWinner();
             computerTurn();
         }
