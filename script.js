@@ -59,6 +59,9 @@ window.onload = function () {
     function computerTurn() {
         setTimeout(function () {
             if (blockOrWin()) {
+                
+            } else if (blocksForks()) {
+                 
             } else {
                 determinesMove();
             }
@@ -102,14 +105,30 @@ window.onload = function () {
                     setsGameTokens(computerToken, firstSquare);
                     return true;
                 }
-            } 
+            }
         }
+        return false;
+    }
+
+    function blocksForks() {
+        const topLeftCorner = gameBoard[0],
+              topRightCorner = gameBoard[2],
+              botLeftCorner = gameBoard[6],
+              botRightCorner = gameBoard[8];
+
+        if (topLeftCorner == playerToken && botRightCorner == playerToken) {
+            setsGameTokens(computerToken, 3);
+            return true;
+        } else if (topRightCorner == playerToken && botLeftCorner == playerToken) {
+            setsGameTokens(computerToken, 1);
+            return true;
+        }  
         return false;
     }
 
     // Determines move priority if no block win move
     function determinesMove() {
-        const movePriority = [0, 4, 6, 8, 2, 1 ,3, 5 ,7];
+        const movePriority = [4, 0, 8, 6, 2, 1 ,3, 5 ,7];
         for (let i = 0; i < movePriority.length; i++) {
             let moveIndex = movePriority[i];
             if (isSquareEmpty(moveIndex)) {
